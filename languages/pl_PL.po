@@ -1,0 +1,323 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Project-Id-Version: TravellerPress\n"
+"POT-Creation-Date: 2015-09-22 12:47+0200\n"
+"PO-Revision-Date: 2015-09-22 13:37+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: travellerpress.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: pl_PL\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/class-travellerpress-admin.php:278
+msgid "TravellerPress Options"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: admin/class-travellerpress-admin.php:279
+msgid "TravellerPress"
+msgstr "TravellerPress"
+
+#: admin/class-travellerpress-admin.php:305
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: admin/class-travellerpress-admin.php:316
+msgid "Map editor"
+msgstr "Edytor map"
+
+#: admin/class-travellerpress-admin.php:325
+msgid "Map elements editor"
+msgstr "Edytor mapy szczegółowej"
+
+#: admin/class-travellerpress-admin.php:761
+msgid "Saved map styles "
+msgstr "Zapisane style map"
+
+#: admin/class-travellerpress-admin.php:778
+msgid "Saved map settings "
+msgstr "Zapisane ustawienia mapy"
+
+#: admin/class-travellerpress-admin.php:842
+msgid "Add new style"
+msgstr "Dodaj nowy styl"
+
+#: admin/partials/map-kml.php:18 admin/partials/map-kml.php:48
+#: admin/views/map-kml.php:19 admin/views/map-kml.php:49
+msgid "URL to KLM"
+msgstr "Adres URL do KLM"
+
+#: admin/partials/map-kml.php:24 admin/partials/map-kml.php:54
+#: admin/views/map-kml.php:25 admin/views/map-kml.php:55
+msgid "Upload your KML file"
+msgstr "Prześlij plik KML"
+
+#: admin/partials/map-kml.php:37 admin/views/map-kml.php:38
+msgid "Add new KML layer"
+msgstr "Dodaj nową warstwę KML"
+
+#: admin/partials/map-meta-fields.php:19
+msgid "Points"
+msgstr "Punkty"
+
+#: admin/partials/map-meta-fields.php:20 admin/views/admin.php:60
+msgid "Polylines"
+msgstr "Polilinie"
+
+#: admin/partials/map-meta-fields.php:21 admin/views/admin.php:61
+msgid "Polygons"
+msgstr "Wielokąty"
+
+#: admin/partials/map-meta-fields.php:22 admin/views/admin.php:62
+msgid "KLM"
+msgstr "KLM"
+
+#: admin/partials/map-meta-fields.php:45
+msgid "Map options"
+msgstr "Opcje mapy"
+
+#: admin/partials/map-meta-fields.php:49 admin/views/admin.php:85
+msgid "Map type"
+msgstr "﻿Rodzaj mapy"
+
+#: admin/partials/map-meta-fields.php:62 admin/views/admin.php:99
+msgid "Map zoom"
+msgstr "Powiększenie mapy"
+
+#: admin/partials/map-meta-fields.php:75 admin/views/admin.php:112
+msgid "Map style"
+msgstr "Styl mapy"
+
+#: admin/partials/map-meta-fields.php:79 admin/views/admin.php:116
+msgid "default"
+msgstr "domyślne"
+
+#: admin/partials/map-meta-fields.php:91 admin/views/admin.php:128
+msgid "Auto open first marker"
+msgstr "Auto otwieranie pierwszego markera"
+
+#: admin/partials/map-meta-fields.php:101 admin/views/admin.php:138
+msgid "Custom center point"
+msgstr "Własny punkt środka mapy"
+
+#: admin/partials/map-meta-main.php:18
+msgid "Post Main marker"
+msgstr "Główny punkt mapy"
+
+#: admin/partials/map-meta-main.php:25 admin/partials/map-points.php:20
+#: admin/partials/map-points.php:95
+msgid "Address"
+msgstr "Adres"
+
+#: admin/partials/map-meta-main.php:29 admin/partials/map-points.php:25
+#: admin/partials/map-points.php:100
+msgid "Latitude"
+msgstr "Szerokość geograficzna"
+
+#: admin/partials/map-meta-main.php:33 admin/partials/map-points.php:26
+#: admin/partials/map-points.php:101
+msgid "Longitude"
+msgstr "Długość geograficzna"
+
+#: admin/partials/map-meta-main.php:36 admin/partials/map-points.php:29
+#: admin/partials/map-points.php:104
+msgid "Marker icon color"
+msgstr "Kolor ikony znacznika"
+
+#: admin/partials/map-meta-main.php:57
+msgid "Set image "
+msgstr "Ustaw obraz"
+
+#: admin/partials/map-meta-main.php:61 admin/partials/map-points.php:55
+#: admin/partials/map-points.php:123 admin/partials/map-polygons.php:51
+#: admin/partials/map-polygons.php:115 admin/partials/map-polylines.php:51
+#: admin/partials/map-polylines.php:116 admin/views/map-polygons.php:52
+#: admin/views/map-polygons.php:116 admin/views/map-polylines.php:51
+#: admin/views/map-polylines.php:116
+msgid "Remove this image"
+msgstr "Usuń to zdjęcie"
+
+#: admin/partials/map-meta-main.php:68 admin/partials/map-points.php:62
+#: admin/partials/map-points.php:130 admin/partials/map-polygons.php:58
+#: admin/partials/map-polygons.php:122 admin/partials/map-polylines.php:58
+#: admin/partials/map-polylines.php:123 admin/views/map-polygons.php:59
+#: admin/views/map-polygons.php:123 admin/views/map-polylines.php:58
+#: admin/views/map-polylines.php:123
+msgid "Title"
+msgstr "Tytuł"
+
+#: admin/partials/map-meta-main.php:74
+msgid "Marker Content"
+msgstr "Zawartość znacznika"
+
+#: admin/partials/map-points.php:34 admin/partials/map-points.php:108
+#: admin/partials/map-polygons.php:30 admin/partials/map-polygons.php:100
+#: admin/partials/map-polylines.php:30 admin/partials/map-polylines.php:101
+#: admin/views/map-polygons.php:31 admin/views/map-polygons.php:101
+#: admin/views/map-polylines.php:30 admin/views/map-polylines.php:101
+msgid "InfoBox settings"
+msgstr "Ustawienia Infobox"
+
+#: admin/partials/map-points.php:51 admin/partials/map-points.php:120
+#: admin/partials/map-polygons.php:47 admin/partials/map-polygons.php:112
+#: admin/partials/map-polylines.php:47 admin/partials/map-polylines.php:113
+#: admin/views/map-polygons.php:48 admin/views/map-polygons.php:113
+#: admin/views/map-polylines.php:47 admin/views/map-polylines.php:113
+msgid "Set image for marker's infobox"
+msgstr "Ustawianie obrazu dla Infobox znacznika"
+
+#: admin/partials/map-points.php:66 admin/partials/map-points.php:134
+#: admin/partials/map-polygons.php:62 admin/partials/map-polygons.php:126
+#: admin/partials/map-polylines.php:62 admin/partials/map-polylines.php:127
+#: admin/views/map-polygons.php:63 admin/views/map-polygons.php:127
+#: admin/views/map-polylines.php:62 admin/views/map-polylines.php:127
+msgid "<strong>Content</strong> (html tags friendly)"
+msgstr "<strong>Treść </strong> (tagi html wspierane)"
+
+#: admin/partials/map-points.php:83
+msgid "Add new marker"
+msgstr "Dodaj znacznik"
+
+#: admin/partials/map-polygons.php:20 admin/partials/map-polygons.php:89
+#: admin/views/map-polygons.php:21 admin/views/map-polygons.php:90
+msgid "Encoded polygone"
+msgstr "Zakodowane polygone"
+
+#: admin/partials/map-polygons.php:26 admin/partials/map-polygons.php:95
+#: admin/views/map-polygons.php:27 admin/views/map-polygons.php:96
+msgid "Polygone color"
+msgstr "Polygone kolor"
+
+#: admin/partials/map-polygons.php:76 admin/views/map-polygons.php:77
+msgid "Draw new polygon"
+msgstr "Narysuj nowy wielokąt"
+
+#: admin/partials/map-polygons.php:77 admin/views/map-polygons.php:78
+msgid "Stop polygon"
+msgstr "Zakończ rysowanie"
+
+#: admin/partials/map-polylines.php:19 admin/partials/map-polylines.php:90
+#: admin/views/map-polylines.php:19 admin/views/map-polylines.php:90
+msgid "Encoded polyline"
+msgstr "Zakodowane polyline"
+
+#: admin/partials/map-polylines.php:25 admin/partials/map-polylines.php:96
+#: admin/views/map-polylines.php:25 admin/views/map-polylines.php:96
+msgid "Polyline color"
+msgstr "Kolor polilinii"
+
+#: admin/partials/map-polylines.php:76 admin/views/map-polylines.php:76
+msgid "Draw new polyline"
+msgstr "Narysuj nową polilinię"
+
+#: admin/partials/map-polylines.php:77 admin/views/map-polylines.php:77
+msgid "Stop polyline"
+msgstr "Zakończ rysowanie"
+
+#: admin/views/admin.php:31
+msgid "Global Map Settings"
+msgstr "Globalne Ustawienia mapy"
+
+#: admin/views/admin.php:32
+msgid "Map Styles"
+msgstr "Style mapy"
+
+#: admin/views/admin.php:33
+msgid "General Settings"
+msgstr "Ustawienia ogólne"
+
+#: admin/views/admin.php:81
+msgid "Map Options"
+msgstr "Opcje mapy"
+
+#: public/class-travellerpress.php:330
+msgctxt "Post Type General Name"
+msgid "Custom Maps"
+msgstr "Własne mapy"
+
+#: public/class-travellerpress.php:331
+msgctxt "Post Type Singular Name"
+msgid "Custom Map"
+msgstr "Własna Mapa"
+
+#: public/class-travellerpress.php:332
+msgid "Custom Maps"
+msgstr "Własne mapy"
+
+#: public/class-travellerpress.php:333
+msgid "Custom Map"
+msgstr "Własna Mapa"
+
+#: public/class-travellerpress.php:334
+msgid "Parent Map:"
+msgstr "Mapa nadrzędna:"
+
+#: public/class-travellerpress.php:335
+msgid "All Maps"
+msgstr "Wszystkie mapy"
+
+#: public/class-travellerpress.php:336
+msgid "Add New Map"
+msgstr "Nowa mapa"
+
+#: public/class-travellerpress.php:337
+msgid "Add New"
+msgstr "Dodaj nową"
+
+#: public/class-travellerpress.php:338
+msgid "New Map"
+msgstr "Nowa mapa"
+
+#: public/class-travellerpress.php:339
+msgid "Edit Map"
+msgstr "Edytuj"
+
+#: public/class-travellerpress.php:340
+msgid "Update Map"
+msgstr "Aktualizacja mapy"
+
+#: public/class-travellerpress.php:341
+msgid "View Map"
+msgstr "Zobacz mapę"
+
+#: public/class-travellerpress.php:342
+msgid "Search Map"
+msgstr "Wyszukaj:"
+
+#: public/class-travellerpress.php:343
+msgid "Not found"
+msgstr "Nie znaleziono"
+
+#: public/class-travellerpress.php:344
+msgid "Not found in Trash"
+msgstr "Nie znaleziono w koszu"
+
+#: public/class-travellerpress.php:347
+msgid "tp_maps"
+msgstr ""
+
+#: public/class-travellerpress.php:348
+msgid "Custom Maps that can be inserted in posts and pages"
+msgstr "Własne mapy, można wstawić w wpisach i stronach"
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://purethemes.net"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Google Maps plugin for keeping travel blog"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Purethemes.net"
+msgstr ""

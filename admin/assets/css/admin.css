@@ -1,0 +1,590 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+#map-elements,
+#main-point-map {
+	height: 300px;
+	width: 100%;
+	margin: 0px 0px 20px 0px
+}
+
+#main-point-form label {
+	width: 150px;
+  	display: inline-block;
+}
+#main-point-form  .description {
+	margin-left: 150px;
+}
+
+.tp-map-actions a:hover,
+.tp-map-actions a {
+	text-decoration: none;
+	color: #666;
+	margin-top: 5px;
+	float: left;
+	display: inline-block;
+}
+.tp-map-actions a.delete {
+	color: #d00
+}
+.tp-map-actions a.linkto {
+	color: #3abc12
+}
+
+
+.tp-map-table {
+	margin-bottom: 15px;
+}
+.tp-map-table :focus {outline:none;}
+
+.tp-map-table tr td {
+	vertical-align: top;
+	border-bottom: 1px solid #ddd
+}
+.tp-map-table tr:nth-child(odd) {
+  background-color: #ffffff;
+}.tp-map-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.tp-map-table .wp-picker-container {
+	padding-left: 15px;
+  	line-height: 35px;
+}
+
+#main-point-map-manager .ui-tabs { 
+	position: relative; 
+	padding: .2em; 
+	zoom: 1; 
+	border:0px;
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav { 
+	margin: 0; 
+	padding:; 0; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li { 
+	list-style: none; 
+	float: left; 
+	position: relative; 
+	top: 2px; 
+	margin: 0 .2em 1px 0;
+	border-bottom: 0 !important; 
+	padding: 0; white-space: nowrap; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li a { 
+	float: left; 
+	padding: .5em 1em; 
+	text-decoration: none; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li.ui-tabs-selected { 
+	margin-bottom: 0; 
+	padding-bottom: 1px; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, 
+#main-point-map-manager .ui-tabs .ui-tabs-nav li.ui-state-disabled a, 
+#main-point-map-manager .ui-tabs .ui-tabs-nav li.ui-state-processing a { 
+	cursor: text; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li a, 
+#main-point-map-manager .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { 
+	cursor: pointer; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-panel { 
+	display: block; 
+	border-width: 0; 
+	padding: 0em; 
+	background: none; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-hide { 
+	display: none !important; 
+}
+
+#main-point-map-manager .ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+	border: 1px solid #ddd;
+	border-bottom: 1px solid #fff;
+	background: #fff
+}
+
+/*
+* Reset the jQuery Tabs if you're using a Theme
+*/
+ 
+/* Resets the contain background and outer borders */
+#map-details-tabs .ui-widget-content { border: none; background: none; }
+#map-details-tabs .ui-widget { font-family: inherit; font-size: inherit; }
+ 
+/* Resets all border radius */
+#map-details-tabs .ui-corner-all,
+#map-details-tabs .ui-corner-top,
+#map-details-tabs .ui-corner-bottom,
+#map-details-tabs .ui-corner-left,
+#map-details-tabs .ui-corner-right,
+#map-details-tabs .ui-corner-br,
+#map-details-tabs .ui-corner-bl,
+#map-details-tabs .ui-corner-tr,
+#map-details-tabs .ui-corner-tl { -webkit-border-radius: 0px; -moz-border-radius: 0px; border-radius: 0px; }
+ 
+/* Resets widget header tabs */
+#map-details-tabs .ui-widget-header { border: none; background: none; font-weight: normal; color: #000000; }
+#map-details-tabs .ui-widget-header li { border: 0px; padding: 0px; margin: 0px; }
+#map-details-tabs .ui-widget-header li a,
+#map-details-tabs .ui-widget-header li a:link,
+#map-details-tabs .ui-widget-header li a:visited,
+#map-details-tabs .ui-widget-header li a,
+#map-details-tabs .ui-widget-header li a:link,
+#map-details-tabs .ui-widget-header li a:visited { border: none; background: none; font-weight: normal; color: #000000;, margin: 0px; padding: 10px 15px; }
+ 
+/* Resets the panel */
+#map-details-tabs .ui-tabs-panel { padding: 0px; }
+
+ .tp-foldable {
+	display: none;
+} 
+
+
+.settings_page_travellerpress div#main-point-map-manager {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.widefat td .tp-over-fold p {
+	margin: 5px 0px
+}
+
+#main-point-map-manager .dashicons {
+	margin-top: 5px;
+}
+
+/* #mappolylines_stop,
+#mappolygons_stop {
+	display: none;
+	position: absolute;
+  	top: 0px;
+  	color: #d00;
+  	right: 3px;
+    font-weight: 600;
+}
+ */
+
+
+
+
+
+.map-box {
+	background-color: #fff;
+}
+
+.map-box #poststuff a h2 {
+	padding: 25px;
+	padding-top: 5px;
+	margin-top: 20px;
+	padding-bottom: 8px;
+	font-size: 15px;
+	text-transform: uppercase;
+	line-height: 21px;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	display: inline-block;
+}
+
+.map-box #poststuff a h2:hover { color: #666; }
+
+.map-box p {
+	padding: 0px 25px 30px 25px;
+	font-size: 14px;
+	line-height: 22px;
+}
+
+.infoBox > img {
+	position: absolute !important;
+	right: 0px;
+	top: 0px;
+}
+
+
+/* Close Button */
+.infoBox-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-block;
+	z-index: 999;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 500;
+	height: 38px;
+	width: 38px;
+	background-color: #fff;
+	color: #333;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	font-family: "FontAwesome";
+}
+
+.infoBox-close:hover {
+	color: #fff;
+	background-color: #3685cf;
+}
+
+
+/* Read More Icon */
+.map-box-icon {
+	height: 38px;
+	width: 38px;
+	position: absolute;
+	bottom:0;
+	right:0;
+	background-color: #3685cf;
+	display: block;
+	color: #fff;
+	font-size: 14px;
+	z-index: 101;
+	text-align: center;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	-webkit-transform: translateX(-50%);
+	-ms-transform: translateX(-50%);
+	transform: translateX(50%);
+	opacity:0;
+	visibility: hidden;
+}
+
+.map-box-icon:before {
+	content: "";
+	font-family: "FontAwesome";
+	position: relative;
+	top: 8px;
+	display: block;
+}
+
+.map-box-image:hover .map-box-icon {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateX(0);
+}
+
+.map-box-image {
+	position: relative;
+	overflow: hidden;
+	display: block;
+}
+
+.infoBox {
+	-webkit-animation: fadeIn 300ms; /* Chrome, Safari, Opera */
+	animation: fadeIn 300ms;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Standard syntax */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.infoBox:after {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 40px;
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #fff;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	z-index: 990;
+}
+
+#map-container {
+	position: relative;
+	top: 0;
+	left: 0;
+	height: 720px;
+	width: 100%;
+	z-index: 990;
+}
+
+.delete-point-image {
+	color: #d00;
+}
+
+.main-point-img-container img,
+.point-img-container img {
+	padding: 5px;
+	border: 1px solid #ddd;
+	max-width: 300px;
+	height: auto
+}
+
+
+/* This stylesheet is used to style the public-facing components of the plugin. */
+#map_elements,
+#map {
+	width:100%;
+	height: 500px;
+}
+
+
+body .map-box {
+	background-color: #fff;
+}
+
+body #poststuff .map-box h2,
+.settings_page_travellerpress  .map-box a h2,
+body #poststuff .map-box a h2 {
+	padding: 5px 25px 25px;
+	margin: 20px 0px 0px 0px;
+	padding-bottom: 8px;
+	font-size: 15px;
+	text-transform: uppercase;
+	line-height: 21px;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	display: inline-block;
+}
+
+body .map-box a {
+	text-decoration: none;
+	border: 0px;
+}
+.infoBox .date {
+    padding: 0 25px 0 25px;
+    color: #888;
+    font-weight: 500;
+    margin: 0;
+    display: block;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: -4px;
+}
+
+body #poststuff .map-box a h2:hover { color: #666; }
+
+body .map-box p {
+	padding: 0px 25px 30px 25px;
+	font-size: 14px;
+	line-height: 22px;
+	margin: 0 0 15px 0;
+}
+
+.infoBox > img {
+	position: absolute !important;
+	right: 0px;
+	top: 0px;
+}
+
+/* Close Button */
+.infoBox-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: inline-block;
+	z-index: 999;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 500;
+	height: 38px;
+	width: 38px;
+	background-color: #fff;
+	color: #333;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	font-family: "FontAwesome";
+}
+
+.infoBox-close:hover {
+	color: #fff;
+	background-color: #3685cf;
+}
+
+
+/* Read More Icon */
+.map-box-icon {
+	height: 38px;
+	width: 38px;
+	position: absolute;
+	bottom:0;
+	right:0;
+	background-color: #3685cf;
+	display: block;
+	color: #fff;
+	font-size: 14px;
+	z-index: 101;
+	text-align: center;
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	-webkit-transform: translateX(50%);
+	-ms-transform: translateX(50%);
+	transform: translateX(50%);
+	opacity:0;
+	visibility: hidden;
+}
+
+.map-box-icon:before {
+	content: "";
+	font-family: "FontAwesome";
+	position: relative;
+	top: 8px;
+	display: block;
+}
+
+.map-box-image:hover .map-box-icon {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transform: translateY(0);
+	-ms-transform: translateY(0);
+	transform: translateX(0);
+}
+
+.map-box-image {
+	position: relative;
+	overflow: hidden;
+	display: block;
+}
+
+.infoBox {
+	-webkit-animation: fadeIn 300ms; /* Chrome, Safari, Opera */
+	animation: fadeIn 300ms;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Standard syntax */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+body .infoBox:after {
+	content: "";
+	position: absolute;
+	bottom: 0px;
+	left: 40px;
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 20px solid #fff;
+}
+
+#mapstyle-list {
+	padding: 0px;
+}
+#mapstyle-list li{
+	border: 1px solid #ccc;
+	padding: 10px 20px 20px;
+	display: block;
+	max-width: 415px;
+	border-radius: 3px;
+	background-color: #fff;
+	position: relative;
+}
+#mapstyle-list label {
+	display: inline-block;
+	width: 110px;
+	vertical-align: top;
+}
+
+#mapstyle-list .delete {
+	color: #d00;
+	text-decoration: none;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+#mapstyle-list .fold {
+	color: #666;
+	text-decoration: none;
+	position: absolute;
+	top: 10px;
+	right: 40px;
+}
+
+.map-options-title {
+    font-size: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin: 20px -20px;
+    padding: 20px;
+    background-color: #eee;
+}
+.wrap .map-options-title h2 {
+	font-size: 20px;
+	padding: 0px;
+}
+
+
+/* admin style improvments */
+
+
+#main_point_color-label {
+	margin-top: -20px;
+}
+
+
+#main-point-map-manager label {
+	width: 150px;
+  	display: inline-block;
+  	vertical-align: middle;
+}
+#main-point-map-manager .textarea-label {
+	vertical-align: top;
+}
+.point-marker-thumb-title {
+	float: left;
+	width: 150px;
+}
+.widefat td p.point-marker-thumb-buttons {
+	margin-left: 150px;
+}
+.delete-point-image {
+	margin-left: 10px
+}
+
+.button.stop_edit_this {
+	display: none;
+}
