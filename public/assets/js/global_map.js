@@ -52,14 +52,14 @@
       disableAutoPan: true,
       alignBottom : true,
       maxWidth: 0,
-      pixelOffset: new google.maps.Size(-60, -5),
+      pixelOffset: new L.Point(-60, -5),
       zIndex: null,
         boxStyle: { 
         width: parseFloat(travellerpress_general_settings.infobox_width)+"px"
       },
       closeBoxMargin: "0",
       closeBoxURL: "",
-      infoBoxClearance: new google.maps.Size(1, 1),
+      infoBoxClearance: new L.Point(1, 1),
       isHidden: false,
       pane: "floatPane",
       enableEventPropagation: false,
@@ -75,7 +75,7 @@
         fillOpacity: 1,
         rotation: 0,
         scale: parseFloat(travellerpress_general_settings.scale),
-        anchor: new google.maps.Point(19,52)
+        anchor: new L.Point(19,52)
        };
     }
 
@@ -83,9 +83,9 @@
       var latlngStr = travellerpress_settings.centerPoint.replace('(','').split(",",2);
       var lat = parseFloat(latlngStr[0]);
       var lng = parseFloat(latlngStr[1]);
-      var center = new google.maps.LatLng(lat, lng);
+      var center = new L.LatLng(lat, lng);
     } else {
-      var center = new google.maps.LatLng(-33.92, 151.25);
+      var center = new L.LatLng(-33.92, 151.25);
     }
 
     if(wpv.mapstyle){
@@ -103,22 +103,20 @@
 
       function initialize() {
 
-      map = new google.maps.Map(document.getElementById('map'), {
+      map = new L.map("map", {
         zoom: set_zoom,
-        backgroundColor: '#fff',
-        scrollwheel: false,
-        panControl: false,
         center: center,
-        mapTypeId: google.maps.MapTypeId[maptype],
+        /*
           zoomControl: true,
           zoomControlOptions: {
               style: google.maps.ZoomControlStyle.LARGE,
               position: google.maps.ControlPosition.LEFT_CENTER
           },
-          styles: mapstyle,
+        */
+          layers: new L.TileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png")
       });
 
-      var bounds = new google.maps.LatLngBounds();
+      var bounds = new L.LatLngBounds();
 
           for (var key in globalmap) {
           var data = globalmap[key];
@@ -129,13 +127,12 @@
           } else {
             marker_content = data['ibcontent'];
           }
-          var marker = new google.maps.Marker({
-              position: new google.maps.LatLng (data['lat'], data['lng']),
-              map: map,
+          var marker = new L.Marker([data['lat'], data['lng']], {
                 icon: iconColor(data['color']), 
                 id: data['id'],
                 ibcontent: marker_content,
           });
+          marker.addTo(map);
           if(data['icon_image']){
             marker.setIcon(data['icon_image']);
           }
@@ -148,8 +145,7 @@
         bounds.extend(marker.position);
 
         //add infoboxes
-
-
+/*
             google.maps.event.addDomListener(marker, 'click', (function(marker, i) {
               return function() {
                  ib.close();
@@ -183,12 +179,12 @@
           map.setCenter(center); 
             });
 
-  
+*/  
 
 
       } //eof for/ adding markers
 
-
+/*
       if(globalmap_elements.polygons) {
             for (var key in globalmap_elements.polygons) {
               var data = globalmap_elements.polygons[key];
@@ -239,7 +235,8 @@
             bounds.extend(polygon.getBounds().getCenter());
             }
           } //eof polygons
-
+*/
+/*
           if(globalmap_elements.polylines) {
             for (var key in globalmap_elements.polylines) {
               var data = globalmap_elements.polylines[key];
@@ -293,7 +290,9 @@
 
             bounds.extend(polyline.getBounds().getCenter());
             }
-          }
+          } //eof polylines
+*/
+
       if(globalmap_elements.kml) {
             for (var key in globalmap_elements.kml) {
               var data = globalmap_elements.kml[key];
@@ -341,7 +340,9 @@
       }
 
     } //eof initialize
-    
+
+      initialize();
+      /*
         google.maps.event.addDomListener(window, 'load', initialize);
 
          $('#prevpoint').click(function(e){
@@ -386,13 +387,16 @@
       return bounds; 
       }
     }
-
+*/
 
 
   });
 
 }(jQuery));
 
+function InfoBox(a) {}
+
+/*
 function InfoBox(a)
 	{
 	a=a||
@@ -940,3 +944,5 @@ InfoBox.prototype.close=function()
 	}
 	this.setMap(null)
 };
+*/
+
