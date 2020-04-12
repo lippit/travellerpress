@@ -310,21 +310,19 @@ class TravellerPress {
 		wp_register_script( $this->plugin_slug . '-single-map', plugins_url( 'assets/js/single_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 		wp_register_script( $this->plugin_slug . '-custom-map', plugins_url( 'assets/js/custom_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 
-		if(isset($general_settings['api'])) {
-			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
-                        wp_register_style(
-                                'leaflet-maps-css',
-                                'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
-                                array(),
-                                null
-                        );
-			wp_register_script(
-				'leaflet-maps-js-api',
-				'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
-				array(),
-				null
-			);
-		}
+		wp_register_style(
+			'leaflet-maps-css',
+			'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
+			array(),
+			null
+		);
+		wp_register_script(
+			'leaflet-maps-js-api',
+			'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
+			array(),
+			null
+		);
+
 		wp_enqueue_script( $this->plugin_slug . '-plugin-script', plugins_url( 'assets/js/public.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 		if(is_singular()) {
 			$ids = $this->find_map_shortcode_get_all_attributes('tp-custom-map',$post->post_content);
