@@ -164,7 +164,12 @@ class TravellerPress_Admin {
 		$general_settings = get_option( 'travellerpress_general_settings' );
 		if(isset($general_settings['api']) && !empty($general_settings['api'])) {
 			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
-		
+		        wp_register_style(
+                                'leaflet-maps-css',
+                                'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
+                                array(),
+                                null
+                        );
 			wp_register_script(
 				'leaflet-maps-js-api',
 				'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
@@ -173,6 +178,7 @@ class TravellerPress_Admin {
 			);
 		}
 
+                wp_enqueue_style( 'leaflet-maps-css' );
 		wp_enqueue_script( 'leaflet-maps-js-api' );
 		wp_enqueue_style( 'wp-color-picker' ); 
 		//wp_enqueue_script( $this->plugin_slug . '-tabs', plugins_url( 'assets/js/tabs.js', __FILE__ ), array(  ) );
