@@ -504,7 +504,7 @@ class TravellerPress {
 						esc_html( get_the_modified_date() )
 					);
 					
-					$ibdata = $ibcontet.'<a href="'.esc_url(get_permalink()).'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url(get_permalink()).'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 					$ibmergecontent = '<li><a href="'.esc_url(get_permalink()).'">'.$title.'</a></li>';
 					$mappoint = array(
 						'address' =>  get_post_meta($the_query->post->ID , 'main_point_longitude',true),
@@ -549,7 +549,7 @@ class TravellerPress {
 				if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 				if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 
-				$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 
 
 				$mappoint = array(
@@ -584,7 +584,7 @@ class TravellerPress {
 				if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 				if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 
-				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 				$polygon['ibdata'] = $ibdata;
 				
 				$meta_maps_polygons[] = $polygon; 
@@ -606,7 +606,7 @@ class TravellerPress {
 				if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 				if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 
-				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 				$polyline['ibdata'] = $ibdata;
 				
 				$meta_maps_polylines[] = $polyline; 
@@ -681,9 +681,9 @@ class TravellerPress {
 				if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 				
 				if(empty($point['pointurl'])){
-                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
                 } else {
-                    $ibdata = $ibcontet.'<h2><a href="'.$point['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+                    $ibdata = $ibcontet.'<h2><a href="'.$point['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p>';
                 }
 				
 				$point['ibdata'] = $ibdata;
@@ -709,9 +709,9 @@ class TravellerPress {
 					$ibdata = "";
 				} else {
 					if(empty($polygon['pointurl'])){
-	                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+	                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 	                } else {
-	                    $ibdata = $ibcontet.'<h2><a href="'.$polygon['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+	                    $ibdata = $ibcontet.'<h2><a href="'.$polygon['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p>';
 	                }
 				}
 				$polygon['ibdata'] = $ibdata;
@@ -733,14 +733,14 @@ class TravellerPress {
 				if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 				if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 
-				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 				if(empty($ibcontet) && empty($title) && empty($content)){
 					$ibdata = "";
 				} else {
 					if(empty($polyline['pointurl'])){
-	                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+	                    $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 	                } else {
-	                    $ibdata = $ibcontet.'<h2><a href="'.$polyline['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+	                    $ibdata = $ibcontet.'<h2><a href="'.$polyline['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p>';
 	                }
 				}
 				$polyline['ibdata'] = $ibdata;
@@ -801,7 +801,7 @@ class TravellerPress {
 					esc_html( get_the_modified_date() )
 				);
 				
-				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 				$mappoint = array(
 					'pointaddress' =>  get_post_meta($post->ID , 'main_point_longitude',true),
 					'pointlat' =>  $lat,
@@ -896,7 +896,7 @@ class TravellerPress {
 					if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
 					if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$point['ibdata'] = $ibdata;
 					
 					$meta_maps_point[] = $point; 
@@ -920,7 +920,7 @@ class TravellerPress {
 					if(empty($ibcontet) && empty($title) && empty($content)){
 						$ibdata = "";
 					} else {
-						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					}
 					$polygon['ibdata'] = $ibdata;
 					
@@ -943,11 +943,11 @@ class TravellerPress {
 					if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 					if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 					if(empty($polyline['pointurl'])) { $url = "#";	} else { $url = $polyline['pointurl']; }
-					$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 					if(empty($ibcontet) && empty($title) && empty($content)){
 						$ibdata = "";
 					} else {
-						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					}
 					$polyline['ibdata'] = $ibdata;
 					
@@ -1007,7 +1007,7 @@ class TravellerPress {
 					esc_html( get_the_modified_date() )
 				);
 				
-				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 				$mappoint = array(
 					'pointaddress' =>  get_post_meta($id , 'main_point_longitude',true),
 					'pointlat' =>  $lat,
