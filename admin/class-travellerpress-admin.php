@@ -166,14 +166,14 @@ class TravellerPress_Admin {
 			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
 		
 			wp_register_script(
-				'google-maps-js-api',
-				'//maps.googleapis.com/maps/api/js?key='.esc_attr($apikey).'&libraries=geometry,places"',
+				'leaflet-maps-js-api',
+				'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
 				array(),
 				null
 			);
 		}
 
-		wp_enqueue_script( 'google-maps-js-api' );
+		wp_enqueue_script( 'leaflet-maps-js-api' );
 		wp_enqueue_style( 'wp-color-picker' ); 
 		//wp_enqueue_script( $this->plugin_slug . '-tabs', plugins_url( 'assets/js/tabs.js', __FILE__ ), array(  ) );
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {

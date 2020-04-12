@@ -313,8 +313,8 @@ class TravellerPress {
 		if(isset($general_settings['api'])) {
 			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
 			wp_register_script(
-				'google-maps-js-api',
-				'//maps.googleapis.com/maps/api/js?key='.esc_attr($apikey).'&libraries=geometry,places&v=3.32"',
+				'leaflet-maps-js-api',
+				'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
 				array(),
 				null
 			);
@@ -615,7 +615,7 @@ class TravellerPress {
 			'kml' => $meta_maps_kml,
 
 		);
-		wp_enqueue_script( 'google-maps-js-api' );
+		wp_enqueue_script( 'leaflet-maps-js-api' );
 		wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 
 		wp_enqueue_script( $this->plugin_slug . '-global-map' );
@@ -831,7 +831,7 @@ class TravellerPress {
 			);
 		}
 
-		wp_enqueue_script( 'google-maps-js-api' );
+		wp_enqueue_script( 'leaflet-maps-js-api' );
 		wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 		wp_enqueue_script( $this->plugin_slug . '-single-map' );
 		wp_localize_script( $this->plugin_slug . '-single-map', 'singlemap', $elements );
@@ -1040,7 +1040,7 @@ class TravellerPress {
 
 		
 		if($type == "as_global") {
-			wp_enqueue_script( 'google-maps-js-api' );
+			wp_enqueue_script( 'leaflet-maps-js-api' );
 			wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 			wp_enqueue_script( $this->plugin_slug . '-custom-map' );
 			$sh_ids= array('custommap'.$id);
@@ -1053,7 +1053,7 @@ class TravellerPress {
 			    </div>
 			</div>';
 		} else {
-			wp_enqueue_script( 'google-maps-js-api' );
+			wp_enqueue_script( 'leaflet-maps-js-api' );
 			wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 			wp_enqueue_script( $this->plugin_slug . '-custom-map' );
 			wp_localize_script( $this->plugin_slug . '-custom-map', 'custommap'.esc_attr($id), $elements );
