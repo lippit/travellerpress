@@ -124,7 +124,6 @@
                         icon: new L.icon(data['pointicon_image'] ? data['pointicon_image'] : iconColor(data.icon))
                     });
 
-                    console.log("Icon: ", iconColor(data.icon));
                     marker.id = data.id;
                     marker.bindPopup(marker_content).on('popupopen', function (e) {
                         currentInfobox = this.id;

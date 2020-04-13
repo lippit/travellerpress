@@ -82,7 +82,7 @@ class TravellerPress {
 		add_shortcode( 'tp-global-map', array( $this, 'show_global_map' ) );
 		add_shortcode( 'tp-single-map', array( $this, 'show_single_map' ) );
 		add_shortcode( 'tp-custom-map', array( $this, 'show_custom_map' ) );
-		
+
 		add_action( 'init',  array( $this, 'infobox_image_size' ) );
 
 	}
@@ -285,8 +285,8 @@ class TravellerPress {
 		$general_settings = get_option( 'travellerpress_general_settings' );
 		$size = (isset($general_settings['map_height'])) ? $general_settings['map_height'] : '500px' ;
         $custom_css = "
-	               .custom_map, 
-	               body #map-container #map_elements, 
+	               .custom_map,
+	               body #map-container #map_elements,
 	               body #map-container #map { height: {$size}; }
 	               body .alternative #map-container, body .alternative#map-container  { height: {$size}; }
 					@media only screen and (min-width: 960px) and (max-width: 1469px) {
@@ -304,11 +304,10 @@ class TravellerPress {
 	public function enqueue_scripts() {
 		global $post;
 		$general_settings = get_option( 'travellerpress_general_settings' );
-		
+
 		wp_register_script( $this->plugin_slug . '-markerclusterer', plugins_url( 'assets/js/markerclusterer.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 		wp_register_script( $this->plugin_slug . '-global-map', plugins_url( 'assets/js/global_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 		wp_register_script( $this->plugin_slug . '-single-map', plugins_url( 'assets/js/single_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
-		wp_register_script( $this->plugin_slug . '-custom-map', plugins_url( 'assets/js/custom_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 
 		wp_register_style(
 			'leaflet-maps-css',
@@ -338,15 +337,15 @@ class TravellerPress {
 
 		    wp_localize_script( $this->plugin_slug . '-plugin-script', 'custom_map_ids', array('custommap'.$post->ID) );
 		}
-		
+
 		if(isset($general_settings['scale'])) {
 			$scale = $general_settings['scale'];
 		} else {
 			$scale = '1.1';
-		}	
+		}
 
-		wp_localize_script( $this->plugin_slug . '-plugin-script', 'travellerpress_general_settings',  
-			array( 
+		wp_localize_script( $this->plugin_slug . '-plugin-script', 'travellerpress_general_settings',
+			array(
 				'scale'	 			=> $scale,
 				'group_text' 		=> esc_html__('Post Series:','travellerpress'),
 				'infobox_width' 	=> (isset($general_settings['infobox_width'])) ? $general_settings['infobox_width'] : 300,
@@ -358,7 +357,7 @@ class TravellerPress {
 	}
 
 
-	
+
 
 	public function register_taxonomies() {
 
@@ -393,7 +392,7 @@ class TravellerPress {
 			'show_in_admin_bar'   => false,
 			'show_in_nav_menus'   => false,
 			'can_export'          => true,
-			'has_archive'         => true,		
+			'has_archive'         => true,
 			'exclude_from_search' => true,
 			'publicly_queryable'  => true,
 			'capability_type'     => 'page',
@@ -439,8 +438,8 @@ class TravellerPress {
 			'postseries' => '',
 			), $atts));
 
-	
-		$args = array( 
+
+		$args = array(
 			'posts_per_page' => -1,
 			'category__in' => $category,
 			'tag__in' => $tag
@@ -464,12 +463,12 @@ class TravellerPress {
 				$the_query->the_post();
 				$lat = get_post_meta($the_query->post->ID, 'main_point_latitude',true);
 				if (!empty($lat)) {
-				    
+
 					$ibcontet = '';
 					$point_image_id = get_post_meta($the_query->post->ID, 'main_point_image',true);
-					
+
 					if(!empty($point_image_id)) {
-						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );	
+						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );
 					} else {
 						$point_image_src = wp_get_attachment_image_src(  get_post_thumbnail_id(), 'travellerpress' );
 					}
@@ -501,7 +500,7 @@ class TravellerPress {
 						esc_attr( get_the_modified_date( 'c' ) ),
 						esc_html( get_the_modified_date() )
 					);
-					
+
 					$ibdata = $ibcontet.'<a href="'.esc_url(get_permalink()).'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 					$ibmergecontent = '<li><a href="'.esc_url(get_permalink()).'">'.$title.'</a></li>';
 					$mappoint = array(
@@ -515,7 +514,7 @@ class TravellerPress {
 						'ibmergecontent' => $ibmergecontent,
 						'ismerged' => 'no'
 					);
-					
+
 
 					// check if such element exists in the array
 					$matching_index = $this->find_matching_location($markers, $mappoint);
@@ -526,7 +525,7 @@ class TravellerPress {
 					    $markers[] = $mappoint;
 					    $i++;
 					}
-					
+
 				}
 				//$markers[] = $mappoint;
 			}
@@ -540,7 +539,7 @@ class TravellerPress {
 			foreach ($meta_maps_points_temp as $point) {
 				$ibcontet = '';
 				if($point['image']){
-						$point_image_src = wp_get_attachment_image_src( $point['image'], 'travellerpress' );	
+						$point_image_src = wp_get_attachment_image_src( $point['image'], 'travellerpress' );
 						$ibcontet .= '<a href="#" class="map-box-image"><img src="'.$point_image_src[0].'" alt=""/><i class="map-box-icon"></i></a>';
 				}
 				if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
@@ -562,8 +561,8 @@ class TravellerPress {
 						'ismerged' => 'no'
 				);
 
-				$i++;	
-				$markers[] = $mappoint;  		
+				$i++;
+				$markers[] = $mappoint;
 			}
 		}
 
@@ -574,18 +573,18 @@ class TravellerPress {
 			foreach ($meta_maps_polygons_temp as $polygon) {
 				$ibcontet = '';
 				$polygon_image_id = $polygon['image'];
-				
+
 				if(!empty($polygon_image_id)) {
-					$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );	
+					$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );
 					$ibcontet .= '<img src="'.$polygon_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-				} 
+				}
 				if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 				if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 
 				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 				$polygon['ibdata'] = $ibdata;
-				
-				$meta_maps_polygons[] = $polygon; 
+
+				$meta_maps_polygons[] = $polygon;
 			}
 		}
 
@@ -593,26 +592,26 @@ class TravellerPress {
 		$meta_maps_polylines_temp = get_option( 'tp_global_mappolylines_value' );
 		if(!empty($meta_maps_polylines_temp)){
 			foreach ($meta_maps_polylines_temp as $polyline) {
-				
+
 				$ibcontet = '';
 				$polyline_image_id = $polyline['image'];
-				
+
 				if(!empty($polyline_image_id)) {
-					$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );	
+					$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );
 					$ibcontet .= '<img src="'.$polyline_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-				} 
+				}
 				if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 				if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 
 				$ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
 				$polyline['ibdata'] = $ibdata;
-				
-				$meta_maps_polylines[] = $polyline; 
-			}	
-		}	
 
-		$meta_maps_kml =get_option('tp_global_mapkml_value'); 
-		
+				$meta_maps_polylines[] = $polyline;
+			}
+		}
+
+		$meta_maps_kml =get_option('tp_global_mapkml_value');
+
 		$elements = array(
 			'polylines' => $meta_maps_polylines,
 			'polygons' => $meta_maps_polygons,
@@ -632,13 +631,13 @@ class TravellerPress {
 			if(!isset($automarker)) { $automarker = $mapoptions['map_auto_open']; }
 			$centerPoint = get_term_meta( get_queried_object_id(), 'travelmatic_map_custom_center_open', TRUE);
 			if(empty($centerPoint)){
-				$centerPoint = (isset($mapoptions['map_custom_center_open'])) ? $mapoptions['map_custom_center_open'] : "";	
+				$centerPoint = (isset($mapoptions['map_custom_center_open'])) ? $mapoptions['map_custom_center_open'] : "";
 			}
 		} else {
 			$automarker = (isset($mapoptions['map_auto_open'])) ? $mapoptions['map_auto_open'] : 1;
 			$centerPoint = (isset($mapoptions['map_custom_center_open'])) ? $mapoptions['map_custom_center_open'] : "";
 		}
-		
+
 		wp_localize_script( $this->plugin_slug . '-global-map', 'travellerpress_settings',
 			    array(
 			        'automarker'=> (isset($automarker)) ? $automarker : 1,
@@ -667,39 +666,39 @@ class TravellerPress {
 		$meta_maps_point_temp = get_post_meta($post->ID, 'mappoints_value', true);
 
 		foreach ($meta_maps_point_temp as $point) {
-				
+
 				$ibcontet = '';
 				$point_image_id = $point['image'];
-				
+
 				if(!empty($point_image_id)) {
-					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );	
+					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );
 					$ibcontet .= '<img src="'.esc_url($point_image_src[0]).'" alt=""/><i class="map-box-icon"></i>';
-				} 
+				}
 				if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
 				if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
-				
+
 				if(empty($point['pointurl'])){
                     $ibdata = $ibcontet.'<h2>'.$title.'</h2><p>'.$content.'</p>';
                 } else {
                     $ibdata = $ibcontet.'<h2><a href="'.$point['pointurl'].'">'.$title.'</a></h2><p>'.$content.'</p>';
                 }
-				
+
 				$point['ibdata'] = $ibdata;
-				
-				$meta_maps_point[] = $point; 
+
+				$meta_maps_point[] = $point;
 		}
 
 		$meta_maps_polygons = array();
 		$meta_maps_polygons_temp = get_post_meta($post->ID, 'mappolygons_value', true);
 		foreach ($meta_maps_polygons_temp as $polygon) {
-				
+
 				$ibcontet = '';
 				$polygon_image_id = $polygon['image'];
-				
+
 				if(!empty($polygon_image_id)) {
-					$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );	
+					$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );
 					$ibcontet .= '<img src="'.esc_url($polygon_image_src[0]).'" alt=""/><i class="map-box-icon"></i>';
-				} 
+				}
 				if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 				if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 
@@ -713,21 +712,21 @@ class TravellerPress {
 	                }
 				}
 				$polygon['ibdata'] = $ibdata;
-				
-				$meta_maps_polygons[] = $polygon; 
+
+				$meta_maps_polygons[] = $polygon;
 		}
 
 		$meta_maps_polylines = array();
 		$meta_maps_polylines_temp = get_post_meta($post->ID, 'mappolylines_value', true);
 		foreach ($meta_maps_polylines_temp as $polyline) {
-				
+
 				$ibcontet = '';
 				$polyline_image_id = $polyline['image'];
-				
+
 				if(!empty($polyline_image_id)) {
-					$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );	
+					$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );
 					$ibcontet .= '<img src="'.$polyline_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-				} 
+				}
 				if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 				if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 
@@ -742,16 +741,16 @@ class TravellerPress {
 	                }
 				}
 				$polyline['ibdata'] = $ibdata;
-				
-				$meta_maps_polylines[] = $polyline; 
+
+				$meta_maps_polylines[] = $polyline;
 		}
 
 
 		$meta_maps_kml = get_post_meta($post->ID, 'mapkml_value', true);
 
-		$map_el_style = get_post_meta($post->ID, 'map_el_style', true); 
+		$map_el_style = get_post_meta($post->ID, 'map_el_style', true);
 		$styles = get_option( 'travellerpress_settings' );
-		
+
 		if( $map_el_style != "default" ) { $mapstyle = $styles[$map_el_style]; } else { $mapstyle = '';}
 
 		$map_el_zoom = get_post_meta($post->ID, 'map_el_zoom', true);
@@ -764,9 +763,9 @@ class TravellerPress {
 			if (!empty($lat)) {
 				$ibcontet = '';
 				$point_image_id = get_post_meta($post->ID, 'main_point_image',true);
-				
+
 				if(!empty($point_image_id)) {
-					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );	
+					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );
 				} else {
 					$point_image_src = wp_get_attachment_image_src(  get_post_thumbnail_id(), 'travellerpress' );
 				}
@@ -798,7 +797,7 @@ class TravellerPress {
 					esc_attr( get_the_modified_date( 'c' ) ),
 					esc_html( get_the_modified_date() )
 				);
-				
+
 				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 				$mappoint = array(
 					'pointaddress' =>  get_post_meta($post->ID , 'main_point_longitude',true),
@@ -808,7 +807,7 @@ class TravellerPress {
 					'id' => 0,
 					'ibdata' => $ibdata
 				);
-				
+
 				$meta_maps_point[] = $mappoint;
 			}
 			$elements = array(
@@ -860,8 +859,8 @@ class TravellerPress {
 	    {
 	        foreach( (array) $matches[1] as $key => $value )
 	        {
-	            
-	                $out[] = $value;  
+
+	                $out[] = $value;
 	        }
 	    }
 
@@ -883,35 +882,35 @@ class TravellerPress {
 		$meta_maps_point_temp = get_post_meta($id, 'mappoints_value', true);
 		if(!empty($meta_maps_point_temp)){
 			foreach ($meta_maps_point_temp as $point) {
-					
+
 					$ibcontet = '';
 					$point_image_id = $point['image'];
-					
+
 					if(!empty($point_image_id)) {
-						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );	
+						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );
 						$ibcontet .= '<img src="'.esc_url($point_image_src[0]).'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
 					if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$point['ibdata'] = $ibdata;
-					
-					$meta_maps_point[] = $point; 
+
+					$meta_maps_point[] = $point;
 			}
 		}
 		$meta_maps_polygons = array();
 		$meta_maps_polygons_temp = get_post_meta($id, 'mappolygons_value', true);
 		if(!empty($meta_maps_polygons_temp)){
 			foreach ($meta_maps_polygons_temp as $polygon) {
-					
+
 					$ibcontet = '';
 					$polygon_image_id = $polygon['image'];
-					
+
 					if(!empty($polygon_image_id)) {
-						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );	
+						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'travellerpress' );
 						$ibcontet .= '<img src="'.esc_url($polygon_image_src[0]).'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 					if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 					if(empty($polygon['pointurl'])) { $url = "#";	} else { $url = $polygon['pointurl']; }
@@ -921,8 +920,8 @@ class TravellerPress {
 						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					}
 					$polygon['ibdata'] = $ibdata;
-					
-					$meta_maps_polygons[] = $polygon; 
+
+					$meta_maps_polygons[] = $polygon;
 			}
 		}
 
@@ -930,14 +929,14 @@ class TravellerPress {
 		$meta_maps_polylines_temp = get_post_meta($id, 'mappolylines_value', true);
 		if(!empty($meta_maps_polylines_temp)){
 			foreach ($meta_maps_polylines_temp as $polyline) {
-					
+
 					$ibcontet = '';
 					$polyline_image_id = $polyline['image'];
-					
+
 					if(!empty($polyline_image_id)) {
-						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );	
+						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'travellerpress' );
 						$ibcontet .= '<img src="'.$polyline_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 					if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 					if(empty($polyline['pointurl'])) { $url = "#";	} else { $url = $polyline['pointurl']; }
@@ -948,16 +947,16 @@ class TravellerPress {
 						$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					}
 					$polyline['ibdata'] = $ibdata;
-					
-					$meta_maps_polylines[] = $polyline; 
+
+					$meta_maps_polylines[] = $polyline;
 			}
 		}
 
 		$meta_maps_kml = get_post_meta($id, 'mapkml_value', true);
 
-		$map_el_style = get_post_meta($id, 'map_el_style', true); 
+		$map_el_style = get_post_meta($id, 'map_el_style', true);
 		$styles = get_option( 'travellerpress_settings' );
-		
+
 		if( $map_el_style != "default" ) { $mapstyle = $styles[$map_el_style]; } else { $mapstyle = '';}
 
 		$map_el_zoom = get_post_meta($id, 'map_el_zoom', true);
@@ -970,9 +969,9 @@ class TravellerPress {
 			if (!empty($lat)) {
 				$ibcontet = '';
 				$point_image_id = get_post_meta($id, 'main_point_image',true);
-				
+
 				if(!empty($point_image_id)) {
-					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );	
+					$point_image_src = wp_get_attachment_image_src( $point_image_id, 'travellerpress' );
 				} else {
 					$point_image_src = wp_get_attachment_image_src(  get_post_thumbnail_id(), 'travellerpress' );
 				}
@@ -1004,7 +1003,7 @@ class TravellerPress {
 					esc_attr( get_the_modified_date( 'c' ) ),
 					esc_html( get_the_modified_date() )
 				);
-				
+
 				$ibdata = $ibcontet.'<a href="'.get_permalink().'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 				$mappoint = array(
 					'pointaddress' =>  get_post_meta($id , 'main_point_longitude',true),
@@ -1014,7 +1013,7 @@ class TravellerPress {
 					'id' => 0,
 					'ibdata' => $ibdata
 				);
-				
+
 				$meta_maps_point[] = $mappoint;
 			}
 			$elements = array(
@@ -1044,7 +1043,7 @@ class TravellerPress {
 			);
 		}
 
-		
+
 		if($type == "as_global") {
                         wp_enqueue_style( 'leaflet-maps-css' );
 			wp_enqueue_script( 'leaflet-maps-js-api' );
