@@ -110,18 +110,21 @@
           for (var key in globalmap) {
           var data = globalmap[key];
           
-          var marker_content = '<div class="map-box"><div class="infoBox" style="width: 285px">';
+          var marker_content = '<div class="map-box infoBox" style="width: 285px">';
           if(data['ismerged'] ==="yes") {
             marker_content += '<h2>'+travellerpress_general_settings.group_text+'</h2><ul class="post-series-links">'+data['ibmergecontent']+'</ul>';
           } else {
             marker_content += data['ibcontent'];
 		  }
-		  marker_content += '</div></div>';
+		  marker_content += '</div>';
 
-          var marker = new L.Marker([data['lat'], data['lng']], {
-              icon: new L.icon(iconColor(data['color'])),
-		  });
-		  marker.bindPopup(marker_content);
+      var marker = new L.Marker([data['lat'], data['lng']], {
+        icon: new L.icon(iconColor(data['color'])),
+      });
+      marker.id = data['id'];
+		  marker.bindPopup(marker_content).on('popupopen', function(e) {
+        currentInfobox = this.id;
+      });
 		  marker.addTo(map);
 
 /*
@@ -271,8 +274,6 @@
           if(travellerpress_general_settings.clusters_status){
             markerCluster = new MarkerClusterer(map, arrMarkers, options); 
           }
-            
-        
 
           if(wpv.mapzoom != 'auto') {
             if(travellerpress_settings.centerPoint) { 
@@ -292,15 +293,14 @@
     } //eof initialize
 
         L.DomEvent.on(window, 'load', initialize);
-      /*
 
          $('#prevpoint').click(function(e){
             e.preventDefault();
             var index = currentInfobox;
             if (index+1 < arrMarkers.length ) {
-                google.maps.event.trigger(arrMarkers[index+1],'click');
+                arrMarkers[index+1].openPopup();
             } else {
-                google.maps.event.trigger(arrMarkers[0],'click');
+                arrMarkers[0].openPopup();
             }
         })
 
@@ -308,20 +308,20 @@
         $('#nextpoint').click(function(e){
           e.preventDefault();
           if ( typeof(currentInfobox) == "undefined" ) {
-               google.maps.event.trigger(arrMarkers[arrMarkers.length-1],'click');
+               arrMarkers[arrMarkers.length-1].openPopup();
           } else {
                var index = currentInfobox;
                if(index-1 < 0) {
                   //if index is less than zero than open last marker from array
-                 google.maps.event.trigger(arrMarkers[arrMarkers.length-1],'click');
+                 arrMarkers[arrMarkers.length-1].openPopup();
                } else {
-                  google.maps.event.trigger(arrMarkers[index-1],'click');
+                 arrMarkers[index-1].openPopup();
                }
           }
 
         })
 
-
+        /*
         if (!google.maps.Polygon.prototype.getBounds) {
       google.maps.Polygon.prototype.getBounds=function(){
           var bounds = new google.maps.LatLngBounds()
