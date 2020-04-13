@@ -305,7 +305,7 @@ class TravellerPress {
 		global $post;
 		$general_settings = get_option( 'travellerpress_general_settings' );
 
-		wp_register_script( $this->plugin_slug . '-markerclusterer', plugins_url( 'assets/js/markerclusterer.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
+		//wp_register_script( $this->plugin_slug . '-markerclusterer', plugins_url( 'assets/js/markerclusterer.min.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 		wp_register_script( $this->plugin_slug . '-global-map', plugins_url( 'assets/js/global_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 		wp_register_script( $this->plugin_slug . '-single-map', plugins_url( 'assets/js/single_map.js', __FILE__ ), array( 'jquery' ), self::VERSION, true );
 
@@ -620,7 +620,7 @@ class TravellerPress {
 		);
                 wp_enqueue_style( 'leaflet-maps-css' );
 		wp_enqueue_script( 'leaflet-maps-js-api' );
-		wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
+		//wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 
 		wp_enqueue_script( $this->plugin_slug . '-global-map' );
 		wp_localize_script( $this->plugin_slug . '-global-map', 'globalmap', $markers );
@@ -837,7 +837,7 @@ class TravellerPress {
 
                 wp_enqueue_style( 'leaflet-maps-css' );
 		wp_enqueue_script( 'leaflet-maps-js-api' );
-		wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
+		//wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 		wp_enqueue_script( $this->plugin_slug . '-single-map' );
 		wp_localize_script( $this->plugin_slug . '-single-map', 'singlemap', $elements );
 
@@ -1047,7 +1047,7 @@ class TravellerPress {
 		if($type == "as_global") {
                         wp_enqueue_style( 'leaflet-maps-css' );
 			wp_enqueue_script( 'leaflet-maps-js-api' );
-			wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
+			//wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 			wp_enqueue_script( $this->plugin_slug . '-custom-map' );
 			$sh_ids= array('custommap'.$id);
 			wp_localize_script( $this->plugin_slug . '-custom-map', 'custom_map_ids', $sh_ids );
@@ -1061,7 +1061,7 @@ class TravellerPress {
 		} else {
                         wp_enqueue_style( 'leaflet-maps-css' );
 			wp_enqueue_script( 'leaflet-maps-js-api' );
-			wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
+			//wp_enqueue_script( $this->plugin_slug . '-markerclusterer' );
 			wp_enqueue_script( $this->plugin_slug . '-custom-map' );
 			wp_localize_script( $this->plugin_slug . '-custom-map', 'custommap'.esc_attr($id), $elements );
 			$output ='
