@@ -82,18 +82,21 @@
       var center = new L.LatLng(-33.92, 151.25);
     }
 
+    /*
     if (wpv.mapstyle) {
       var mapstyle = JSON.parse(wpv.mapstyle.style);
     } else {
       var mapstyle = [{ "featureType": "landscape.man_made", "elementType": "geometry", "stylers": [{ "color": "#f7f1df" }] }, { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{ "color": "#d0e3b4" }] }, { "featureType": "landscape.natural.terrain", "elementType": "geometry", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi", "elementType": "labels", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.business", "elementType": "all", "stylers": [{ "visibility": "off" }] }, { "featureType": "poi.medical", "elementType": "geometry", "stylers": [{ "color": "#fbd3da" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#bde6ab" }] }, { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "visibility": "off" }] }, { "featureType": "road", "elementType": "labels", "stylers": [{ "visibility": "off" }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#ffe15f" }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#efd151" }] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "road.local", "elementType": "geometry.fill", "stylers": [{ "color": "black" }] }, { "featureType": "transit.station.airport", "elementType": "geometry.fill", "stylers": [{ "color": "#cfb2db" }] }, { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#a2daf2" }] }];
     }
+    */
 
     if (wpv.mapzoom === 'auto') {
       var set_zoom = 10;
     } else {
       var set_zoom = parseInt(wpv.mapzoom);
     }
-    var maptype = wpv.maptype;
+
+    //var maptype = wpv.maptype;
 
     function initialize() {
 
@@ -128,10 +131,9 @@
         marker.addTo(map);
 
         arrMarkers[data['id']] = marker;
+
         //extend the bounds to include each marker's position
-
         bounds.extend(marker.getLatLng());
-
 
       } //eof for/ adding markers
 
