@@ -4,14 +4,14 @@
   $(function () {
 
     var map, i, markerCluster;
-    var markers = [];
     var arrMarkers = [];
 
-      var boxText = document.createElement("div");
-      boxText.className = 'map-box';
+      //var boxText = document.createElement("div");
+      //boxText.className = 'map-box';
 
         var currentInfobox;
 
+/*
         var clusterStyles = [
       {
         textColor: 'white',
@@ -62,7 +62,7 @@
       pane: "floatPane",
       enableEventPropagation: false,
         };
-    // Place your public-facing JavaScript here
+    */
     
     function iconColor(color) {
         var s = travellerpress_general_settings.scale;
@@ -79,7 +79,7 @@
       var lng = parseFloat(latlngStr[1]);
       var center = new L.LatLng(lat, lng);
     } else {
-      var center = new L.LatLng(47.5, 19.05);
+      var center = new L.LatLng(-33.92, 151.25);
     }
 
     if(wpv.mapstyle){
@@ -116,27 +116,21 @@
           } else {
             marker_content += data['ibcontent'];
 		  }
-		  marker_content += '</div>';
+      marker_content += '</div>';
 
       var marker = new L.Marker([data['lat'], data['lng']], {
-        icon: new L.icon(iconColor(data['color'])),
+        icon: new L.icon(data['icon_image'] ? data['icon_image'] : iconColor(data['color'])),
       });
       marker.id = data['id'];
 		  marker.bindPopup(marker_content).on('popupopen', function(e) {
         currentInfobox = this.id;
       });
 		  marker.addTo(map);
-
-/*
-          if(data['icon_image']){
-            marker.setIcon(data['icon_image']);
-          }
-*/
           
           arrMarkers[data['id']] = marker;
           //extend the bounds to include each marker's position
          
-        bounds.extend(marker.position);
+        bounds.extend(marker.getLatLng());
 
 
 		  } //eof for/ adding markers
@@ -248,7 +242,6 @@
             bounds.extend(polyline.getBounds().getCenter());
             }
           } //eof polylines
-*/
 
       if(globalmap_elements.kml) {
             for (var key in globalmap_elements.kml) {
@@ -260,8 +253,7 @@
             kmllayer.setMap(map);
             
           }
-          } 
-
+          }
 
           var options = {
               imagePath: travellerpress_general_settings.wpv_url+'/images/m',
@@ -274,21 +266,21 @@
           if(travellerpress_general_settings.clusters_status){
             markerCluster = new MarkerClusterer(map, arrMarkers, options); 
           }
+*/
 
-          if(wpv.mapzoom != 'auto') {
-            if(travellerpress_settings.centerPoint) { 
-
-            } else {
-              //map.setCenter(bounds.getCenter());
-            }
-          map.setZoom(parseInt(wpv.mapzoom));
+        if (wpv.mapzoom != 'auto') {
+          if (!travellerpress_settings.centerPoint) {
+            center = bounds.getCenter();
+          }
+          map.setView(center, zoom);
         } else {
-          if(travellerpress_settings.centerPoint) {
-              
-            } else {
-              //map.fitBounds(bounds);
-            }
-           
+          if (!travellerpress_settings.centerPoint) {
+            map.fitBounds(bounds);
+          }
+        }
+
+        if(travellerpress_settings.automarker === '1') {
+          arrMarkers[0].openPopup();
         }
     } //eof initialize
 
@@ -337,7 +329,6 @@
       }
     }
 */
-
 
   });
 
