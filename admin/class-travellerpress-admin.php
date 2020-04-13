@@ -162,23 +162,20 @@ class TravellerPress_Admin {
 	public function enqueue_admin_scripts() {
 
 		$general_settings = get_option( 'travellerpress_general_settings' );
-		if(isset($general_settings['api']) && !empty($general_settings['api'])) {
-			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
-		        wp_register_style(
-                                'leaflet-maps-css',
-                                'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
-                                array(),
-                                null
-                        );
-			wp_register_script(
-				'leaflet-maps-js-api',
-				'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
-				array(),
-				null
-			);
-		}
+        wp_register_style(
+            'leaflet-maps-css',
+            'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
+            array(),
+            null
+        );
+        wp_register_script(
+            'leaflet-maps-js-api',
+            'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
+            array(),
+            null
+        );
 
-                wp_enqueue_style( 'leaflet-maps-css' );
+        wp_enqueue_style( 'leaflet-maps-css' );
 		wp_enqueue_script( 'leaflet-maps-js-api' );
 		wp_enqueue_style( 'wp-color-picker' );
 		//wp_enqueue_script( $this->plugin_slug . '-tabs', plugins_url( 'assets/js/tabs.js', __FILE__ ), array(  ) );
@@ -189,11 +186,9 @@ class TravellerPress_Admin {
 		$screen = get_current_screen();
 
 		if ( $this->plugin_screen_hook_suffix == $screen->id || $this->is_edit_page()) {
-			if(isset($general_settings['api']) && !empty($general_settings['api'])) {
 			wp_enqueue_media();
 
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery','jquery-ui-tabs','jquery-ui-sortable', 'wp-color-picker' ), TravellerPress::VERSION );
-			}
 		}
 		if (  $this->plugin_screen_hook_suffix == $screen->id ) {  //$this->plugin_screen_hook_suffix == $screen->id  ||
 			wp_enqueue_script( $this->plugin_slug . '-options-script', plugins_url( 'assets/js/options.js', __FILE__ ), array( 'jquery' ), TravellerPress::VERSION );
@@ -203,6 +198,7 @@ class TravellerPress_Admin {
 	}
 
 	function wpvoyager_update_api_notice() {
+        /*
 		$general_settings = get_option( 'travellerpress_general_settings' );
 		if(!isset($general_settings['api']) || empty($general_settings['api'])) {
 		    ?>
@@ -210,7 +206,8 @@ class TravellerPress_Admin {
 		        <p><?php _e( 'Hi! Since last changes in Google Maps <strong>it\'s required now to provide API</strong> to be able to include maps on your page. You can do it in <a href="' . admin_url( 'admin.php?page=' . $this->plugin_slug ) . '">' . __( 'TravellerPress Settings', $this->plugin_slug ) . '</a>. Visit this <a target="_blank" href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true">link</a> to generate API key for your website. <strong>Here is helpful <a href="http://www.docs.purethemes.net/travelmatic/knowledge-base/getting-an-api-key/" target="_blank">guide</a></strong>.', 'travellerpress' ); ?></p>
 		    </div>
 		    <?php
-		}
+        }
+        */
 	}
 
 
