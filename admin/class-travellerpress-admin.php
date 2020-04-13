@@ -76,7 +76,7 @@ class TravellerPress_Admin {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'travellerpress_settings_init' ));
-		
+
 		add_action( 'admin_head', array( $this, 'add_map_data_admin_head' ) );
 		add_filter( 'manage_tp_maps_posts_columns', array( $this, 'tp_modify_maps_table' ) );
 		add_filter( 'manage_tp_maps_posts_custom_column', array( $this, 'tp_modify_maps_table_row' ), 10, 2 );
@@ -140,7 +140,7 @@ class TravellerPress_Admin {
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
-		$post_types = apply_filters('travellerpress_post_types', array('post','page','tp_maps'));  
+		$post_types = apply_filters('travellerpress_post_types', array('post','page','tp_maps'));
 		$screen = get_current_screen();
 		if ( $this->plugin_screen_hook_suffix == $screen->id || in_array($screen->id, $post_types) ) {
 			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), TravellerPress::VERSION );
@@ -160,7 +160,7 @@ class TravellerPress_Admin {
 	 * @return    null    Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-		
+
 		$general_settings = get_option( 'travellerpress_general_settings' );
 		if(isset($general_settings['api']) && !empty($general_settings['api'])) {
 			$apikey = preg_replace('/\s+/', '', $general_settings['api']);
@@ -180,18 +180,18 @@ class TravellerPress_Admin {
 
                 wp_enqueue_style( 'leaflet-maps-css' );
 		wp_enqueue_script( 'leaflet-maps-js-api' );
-		wp_enqueue_style( 'wp-color-picker' ); 
+		wp_enqueue_style( 'wp-color-picker' );
 		//wp_enqueue_script( $this->plugin_slug . '-tabs', plugins_url( 'assets/js/tabs.js', __FILE__ ), array(  ) );
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
 
 		$screen = get_current_screen();
-		
+
 		if ( $this->plugin_screen_hook_suffix == $screen->id || $this->is_edit_page()) {
 			if(isset($general_settings['api']) && !empty($general_settings['api'])) {
 			wp_enqueue_media();
-			
+
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery','jquery-ui-tabs','jquery-ui-sortable', 'wp-color-picker' ), TravellerPress::VERSION );
 			}
 		}
@@ -314,9 +314,9 @@ class TravellerPress_Admin {
 				foreach ($_POST['travellerpress_globalMapSettings'] as $k => $v) {
 					$mapoptions[$k] = $v;
 				};
-				
+
 	            update_option( 'travellerpress_globalMapSettings', $mapoptions);
- 
+
 				/*header("Location: options-general.php?page=travellerpress&saved=true");
 	            die;*/
 	        }
@@ -413,31 +413,31 @@ class TravellerPress_Admin {
 	        return in_array( $pagenow, array( 'post.php', 'post-new.php' ) );
 	}
 
-	function add_map_data_admin_head() { 
+	function add_map_data_admin_head() {
 		global $post;
 		global $pagenow;
     	if ($this->is_edit_page()){
-		
+
 			$meta_maps_point = array();
 			$meta_maps_point_temp = get_post_meta($post->ID, 'mappoints_value', true);
 			if(!empty($meta_maps_point_temp)){
 				foreach ($meta_maps_point_temp as $point) {
-					
+
 					$ibcontet = '';
 					$point_image_id = $point['image'];
-					
+
 					if(!empty($point_image_id)) {
-						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'medium' );	
+						$point_image_src = wp_get_attachment_image_src( $point_image_id, 'medium' );
 						$ibcontet .= '<img src="'.$point_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
 					if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
-					
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a></a><p>'.$content.'</p>';
 					$point['ibdata'] = $ibdata;
-					
-					$meta_maps_point[] = $point; 
+
+					$meta_maps_point[] = $point;
 				}
 			}
 
@@ -447,19 +447,19 @@ class TravellerPress_Admin {
 				foreach ($meta_maps_polygons_temp as $polygon) {
 					$ibcontet = '';
 					$polygon_image_id = $polygon['image'];
-					
+
 					if(!empty($polygon_image_id)) {
-						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'medium' );	
+						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'medium' );
 						$ibcontet .= '<img src="'.$polygon_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 					if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$polygon['ibdata'] = $ibdata;
-					
-					$meta_maps_polygons[] = $polygon; 
+
+					$meta_maps_polygons[] = $polygon;
 				}
 			}
 
@@ -468,24 +468,24 @@ class TravellerPress_Admin {
 			$meta_maps_polylines_temp = get_post_meta($post->ID, 'mappolylines_value', true);
 			if(!empty($meta_maps_polylines_temp)){
 				foreach ($meta_maps_polylines_temp as $polyline) {
-					
+
 					$ibcontet = '';
 					$polyline_image_id = $polyline['image'];
-					
+
 					if(!empty($polyline_image_id)) {
-						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'medium' );	
+						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'medium' );
 						$ibcontet .= '<img src="'.$polyline_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 					if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$polyline['ibdata'] = $ibdata;
-					
-					$meta_maps_polylines[] = $polyline; 
-				}	
-			}	
+
+					$meta_maps_polylines[] = $polyline;
+				}
+			}
 
 
 			$meta_maps_kml = get_post_meta($post->ID, 'mapkml_value', true);
@@ -506,7 +506,7 @@ class TravellerPress_Admin {
 
 			$options = get_option( 'travellerpress_globalMapSettings' );
 			$map_custom_center_open = (isset($options['map_custom_center_open']) && $options['map_custom_center_open'] != '') ? $options['map_custom_center_open'] : '';
-			
+
 
 		?>
 		<script type="text/javascript" >
@@ -517,10 +517,10 @@ class TravellerPress_Admin {
 	   		var mpPoint = <?php echo json_encode($mappoint); ?>;
 	   		var centerPoint =  <?php echo json_encode($map_custom_center_open); ?>
     	</script>
-	<?php } 
+	<?php }
 	$screen = get_current_screen();
 
-	if(isset($screen) && $this->plugin_screen_hook_suffix == $screen->id ) { 
+	if(isset($screen) && $this->plugin_screen_hook_suffix == $screen->id ) {
 
 			$meta_maps_polygons = array();
 			$meta_maps_polygons_temp = get_option( 'tp_global_mappolygons_value' );
@@ -528,19 +528,19 @@ class TravellerPress_Admin {
 				foreach ($meta_maps_polygons_temp as $polygon) {
 					$ibcontet = '';
 					$polygon_image_id = $polygon['image'];
-					
+
 					if(!empty($polygon_image_id)) {
-						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'medium' );	
+						$polygon_image_src = wp_get_attachment_image_src( $polygon_image_id, 'medium' );
 						$ibcontet .= '<img src="'.$polygon_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polygon['title'])) { $title = ''; } else { $title = $polygon['title'];	}
 					if(empty($polygon['data'])) { $content = "";	} else { $content = $polygon['data']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
-					
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$polygon['ibdata'] = $ibdata;
-					
-					$meta_maps_polygons[] = $polygon; 
+
+					$meta_maps_polygons[] = $polygon;
 				}
 			}
 
@@ -548,24 +548,24 @@ class TravellerPress_Admin {
 			$meta_maps_polylines_temp = get_option( 'tp_global_mappolylines_value' );
 			if(!empty($meta_maps_polylines_temp)){
 				foreach ($meta_maps_polylines_temp as $polyline) {
-					
+
 					$ibcontet = '';
 					$polyline_image_id = $polyline['image'];
-					
+
 					if(!empty($polyline_image_id)) {
-						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'medium' );	
+						$polyline_image_src = wp_get_attachment_image_src( $polyline_image_id, 'medium' );
 						$ibcontet .= '<img src="'.$polyline_image_src[0].'" alt=""/><i class="map-box-icon"></i>';
-					} 
+					}
 					if(empty($polyline['title'])) { $title = ''; } else { $title = $polyline['title'];	}
 					if(empty($polyline['data'])) { $content = "";	} else { $content = $polyline['data']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 					$polyline['ibdata'] = $ibdata;
-					
-					$meta_maps_polylines[] = $polyline; 
-				}	
-			}	
+
+					$meta_maps_polylines[] = $polyline;
+				}
+			}
 
 			$meta_maps_kml =get_option('tp_global_mapkml_value');
 			$args = array( 'posts_per_page' => -1 );
@@ -578,14 +578,14 @@ class TravellerPress_Admin {
 			if(!empty($meta_maps_points_temp)){
 				foreach ($meta_maps_points_temp as $point) {
 					if($point['image']){
-						$point_image_src = wp_get_attachment_image_src( $point['image'], 'travellerpress' );	
+						$point_image_src = wp_get_attachment_image_src( $point['image'], 'travellerpress' );
 						$ibcontet .= '<a href="#" class="map-box-image"><img src="'.$point_image_src[0].'" alt=""/><i class="map-box-icon"></i></a>';
 					}
 					if(empty($point['pointtitle'])) { $title = $point['pointaddress']; } else {	$title = $point['pointtitle'];	}
 					if(empty($point['pointdata'])) { $content = "";	} else { $content = $point['pointdata']; }
 					if(empty($point['pointurl'])) { $url = "#";	} else { $url = $point['pointurl']; }
 
-					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+					$ibdata = $ibcontet.'<a href="'.esc_url($url).'"><h2>'.$title.'</h2></a><p>'.$content.'</p>';
 
 					$mappoint = array(
 							'pointaddress' =>  $point['pointaddress'],
@@ -598,25 +598,25 @@ class TravellerPress_Admin {
 							'ibmergecontent' => '',
 							'ismerged' => 'no'
 					);
-					
-					$i++;	
-					$markers[] = $mappoint;  		
+
+					$i++;
+					$markers[] = $mappoint;
 				}
 			}
 
 			// The Loop
 			if ( $the_query->have_posts() ) {
-				
+
 				while ( $the_query->have_posts() ) {
 					$the_query->the_post();
 					$lat = get_post_meta($the_query->post->ID, 'main_point_latitude',true);
 					if (!empty($lat)) {
-					    
+
 						$ibcontet = '';
 						$point_image_id = get_post_meta($the_query->post->ID, 'main_point_image',true);
-						
+
 						if(!empty($point_image_id)) {
-							$point_image_src = wp_get_attachment_image_src( $point_image_id, 'medium' );	
+							$point_image_src = wp_get_attachment_image_src( $point_image_id, 'medium' );
 						} else {
 							$point_image_src = wp_get_attachment_image_src(  get_post_thumbnail_id(), 'medium' );
 						}
@@ -648,8 +648,8 @@ class TravellerPress_Admin {
 							esc_attr( get_the_modified_date( 'c' ) ),
 							esc_html( get_the_modified_date() )
 						);
-						
-						$ibdata = $ibcontet.'<a href="'.esc_url(get_permalink()).'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p><div class="infoBox-close"><i class="fa fa-times"></i></div>';
+
+						$ibdata = $ibcontet.'<a href="'.esc_url(get_permalink()).'"><h2>'.$title.'</h2></a>'.$time_string.'<p>'.$content.'</p>';
 						$ibmergecontent = '<li><a href="'.esc_url(get_permalink()).'">'.$title.'</a></li>';
 						$mappoint = array(
 							'pointaddress' =>  get_post_meta($the_query->post->ID , 'main_point_longitude',true),
@@ -662,18 +662,18 @@ class TravellerPress_Admin {
 							'ibmergecontent' => $ibmergecontent,
 							'ismerged' => 'no'
 						);
-						
+
 					    $markers[] = $mappoint;
 					    $i++;
-						
+
 					}
 					//$markers[] = $mappoint;
 				}
-			} 
+			}
 
 			$options = get_option( 'travellerpress_globalMapSettings' );
 			$map_custom_center_open = (isset($options['map_custom_center_open']) && $options['map_custom_center_open'] != '') ? $options['map_custom_center_open'] : '';
-			
+
 		?>
 
 		<script type="text/javascript" >
@@ -744,15 +744,15 @@ class TravellerPress_Admin {
  			if(isset($_POST['main_point_title'])) {
  				$main_point_title = sanitize_text_field( $_POST['main_point_title'] );
  				update_post_meta($post_id, 'main_point_title', $main_point_title);
-	 		}	
+	 		}
 	 		if(isset($_POST['main_point_text'])) {
  				$main_point_text = wp_kses_post( $_POST['main_point_text'] );
- 				update_post_meta($post_id, 'main_point_text', $main_point_text);	
+ 				update_post_meta($post_id, 'main_point_text', $main_point_text);
  			}
  			if(isset($_POST['main_point_color'])){
  				$main_point_color = sanitize_text_field( $_POST['main_point_color'] );
 	 			update_post_meta($post_id, 'main_point_color', $main_point_color);
-			}			
+			}
 			if(isset($_POST['main_point_icon_image'])){
  				$main_point_icon_image = sanitize_text_field( $_POST['main_point_icon_image'] );
 	 			update_post_meta($post_id, 'main_point_icon_image', $main_point_icon_image);
@@ -821,7 +821,7 @@ class TravellerPress_Admin {
             }
             update_post_meta($post_id, 'mappolylines_value', $mappolylines_data);
 
- 			
+
  			$mapkml_data = array();
  			$i=0;
             foreach ($_POST['mapkml_url'] as $k => $v) {
@@ -837,13 +837,13 @@ class TravellerPress_Admin {
 
 
             $map_el_type = sanitize_text_field( $_POST['map_el_type'] );
- 			update_post_meta($post_id, 'map_el_type', $map_el_type);   
+ 			update_post_meta($post_id, 'map_el_type', $map_el_type);
 
  			$map_auto_open = sanitize_text_field( $_POST['map_auto_open'] );
- 			update_post_meta($post_id, 'map_auto_open', $map_auto_open);            
+ 			update_post_meta($post_id, 'map_auto_open', $map_auto_open);
 
  			$map_el_zoom = sanitize_text_field( $_POST['map_el_zoom'] );
- 			update_post_meta($post_id, 'map_el_zoom', $map_el_zoom); 			
+ 			update_post_meta($post_id, 'map_el_zoom', $map_el_zoom);
 
  			$map_el_style = sanitize_text_field( $_POST['map_el_style'] );
  			update_post_meta($post_id, 'map_el_style', $map_el_style);
@@ -853,112 +853,112 @@ class TravellerPress_Admin {
 
 	}
 
-	
-	
-	function travellerpress_settings_init(  ) { 
+
+
+	function travellerpress_settings_init(  ) {
 
 		register_setting( 'mapStyles', 'travellerpress_settings' );
 
 		add_settings_section(
-			'travellerpress_mapStyles_section', 
-			'', 
-			array( $this,'travellerpress_settings_section_callback'), 
+			'travellerpress_mapStyles_section',
+			'',
+			array( $this,'travellerpress_settings_section_callback'),
 			'mapStyles'
 		);
 
-		add_settings_field( 
-			'travellerpress_text_field_0', 
-			__( 'Saved map styles ', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_text_field_0',
+			__( 'Saved map styles ', 'travellerpress' ),
 			array( $this, 'travellerpress_mapstyles' ),
-			'mapStyles', 
-			'travellerpress_mapStyles_section' 
+			'mapStyles',
+			'travellerpress_mapStyles_section'
 		);
 
 		register_setting( 'mapGeneral', 'travellerpress_general_settings' );
 
 		add_settings_section(
-			'travellerpress_mapGeneral_section', 
-			'', 
-			array( $this,'travellerpress_settings_section_callback'), 
+			'travellerpress_mapGeneral_section',
+			'',
+			array( $this,'travellerpress_settings_section_callback'),
 			'mapGeneral'
 		);
 
-			
-		add_settings_field( 
-			'travellerpress_api_field', 
-			__( 'Google API key for map features', 'travellerpress' ), 
+
+		add_settings_field(
+			'travellerpress_api_field',
+			__( 'Google API key for map features', 'travellerpress' ),
 			array( $this, 'travellerpress_api_key' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
 		);
 
-		add_settings_field( 
-			'travellerpress_map_height', 
-			__( 'Map height', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_map_height',
+			__( 'Map height', 'travellerpress' ),
 			array( $this, 'travellerpress_map_height' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);	
-
-		add_settings_field( 
-			'travellerpress_marker_ratios', 
-			__( 'Icon marker size ratio', 'travellerpress' ), 
-			array( $this, 'travellerpress_marker_scale' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
 		);
 
-		add_settings_field( 
-			'travellerpress_infobox_height', 
-			__( 'Markers infobox thumbnail height', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_marker_ratios',
+			__( 'Icon marker size ratio', 'travellerpress' ),
+			array( $this, 'travellerpress_marker_scale' ),
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
+
+		add_settings_field(
+			'travellerpress_infobox_height',
+			__( 'Markers infobox thumbnail height', 'travellerpress' ),
 			array( $this, 'travellerpress_infobox_height' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);		
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
 
-		add_settings_field( 
-			'travellerpress_infobox_width', 
-			__( 'Markers infobox width', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_infobox_width',
+			__( 'Markers infobox width', 'travellerpress' ),
 			array( $this, 'travellerpress_infobox_width' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);			
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
 
-		add_settings_field( 
-			'travellerpress_clusters_status', 
-			__( 'Enable/disable Marker Clusters', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_clusters_status',
+			__( 'Enable/disable Marker Clusters', 'travellerpress' ),
 			array( $this, 'travellerpress_clusters_status' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);	
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
 
-		add_settings_field( 
-			'travellerpress_min_cluster_size', 
-			__( 'Minimum Cluster Size', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_min_cluster_size',
+			__( 'Minimum Cluster Size', 'travellerpress' ),
 			array( $this, 'travellerpress_min_cluster_size' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);			
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
 
-		add_settings_field( 
-			'travellerpress_max_cluster_zoom', 
-			__( 'Maximum Cluster Zoom', 'travellerpress' ), 
+		add_settings_field(
+			'travellerpress_max_cluster_zoom',
+			__( 'Maximum Cluster Zoom', 'travellerpress' ),
 			array( $this, 'travellerpress_max_cluster_zoom' ),
-			'mapGeneral', 
-			'travellerpress_mapGeneral_section' 
-		);		
+			'mapGeneral',
+			'travellerpress_mapGeneral_section'
+		);
 
 
 
 	}
 
 
-	function travellerpress_mapstyles(  ) { 
+	function travellerpress_mapstyles(  ) {
 
 		$options = get_option( 'travellerpress_settings' );
-		
+
 		?>
-		
+
 		<ul id="mapstyle-list">
 		<?php if(empty($options)) {?>
 			<li data-id="0">
@@ -977,12 +977,12 @@ class TravellerPress_Admin {
 				<a class="fold" href="#"><span class="dashicons dashicons-arrow-right toggle"></span></a>
 				<a class="delete" href="#"><span class="dashicons dashicons-dismiss"></span></a>
 			</li>
-		
+
 		<?php } else { ?>
-			
-				<?php 
+
+				<?php
 				$i=0;
-				foreach ($options as $key) { 
+				foreach ($options as $key) {
 					if(!empty($key['style'])){  ?>
 					<li data-id="<?php echo esc_attr($i);?>">
 						<div class="tp-over-fold">
@@ -1002,7 +1002,7 @@ class TravellerPress_Admin {
 					</li>
 				<?php $i++; }
 				} ?>
-			
+
 		<?php } ?>
 		</ul>
 		<p class="description"><?php esc_html_e("You can use custom map styles with Google Maps so you won't need to use always the same boring map. There are two big sites with pre-made styles:",'travellerpress'); ?> <a href="https://snazzymaps.com/">Snazzy Maps</a> and <a href="http://www.mapstylr.com/">Mapstylr</a>.<?php esc_html_e(' Just copy one of the codes from that website and add here as your style','travellerpress'); ?></p><br><br>
@@ -1017,17 +1017,17 @@ class TravellerPress_Admin {
 		esc_html_e( "<p>This is a global map - each point on map is representation of single post (unless more than one post is set to the exact same location). Using this panel you can add additional polylines, polygones or KML files to this map.</p>",'travellerpress');
 	}
 
-	function travellerpress_marker_scale(  ) { 
+	function travellerpress_marker_scale(  ) {
 
 		$options = get_option( 'travellerpress_general_settings' );
-		
+
 		if(isset($options['scale'])) {
 			$scale = $options['scale'];
 		} else {
 			$scale = "1.1";
 		}
 		?>
-		
+
 		<select name="travellerpress_general_settings[scale]" id="mapsettings_markerscale">
 			<option <?php selected( $scale, '0.4' ); ?> value="0.4">0.4</option>
 			<option <?php selected( $scale, '0.5' ); ?> value="0.5">0.5</option>
@@ -1040,16 +1040,16 @@ class TravellerPress_Admin {
 			<option <?php selected( $scale, '1.2' ); ?> value="1.2">1.2</option>
 		</select>
 		<p class="description"><?php esc_html_e('If you feel your map is too cramped you can change the value of icons scale, default is 1.1, changing it to lower will make map icons smaller','travellerpress'); ?></p><br><br>
-		
+
 
 		<?php
 
 	}
 
-	function travellerpress_api_key(  ) { 
-		
+	function travellerpress_api_key(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		if(isset($options['api'])) {
 			$api = $options['api'];
 		} else {
@@ -1062,11 +1062,11 @@ class TravellerPress_Admin {
         echo '<p class="description">Since June 2016 it\'s required by Google Maps to provide API key to display maps on your page. Visit this <a href="https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend&keyType=CLIENT_SIDE&reusekey=true">link</a> to generate API key for your website.</p><strong>Here is helpful <a href="http://www.docs.purethemes.net/travelmatic/knowledge-base/getting-an-api-key/" target="_blank">guide</a></strong>.<br><br> ';
 
 	}
-	function travellerpress_map_height(  ) { 
-		
+	function travellerpress_map_height(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
 
-		
+
 		if(isset($options['map_height'])) {
 			$api = $options['map_height'];
 		} else {
@@ -1076,7 +1076,7 @@ class TravellerPress_Admin {
 			} else {
 				$api = '500px';
 			}
-			
+
 		}
         printf(
             '<input type="text" id="map_height" name="travellerpress_general_settings[map_height]" class="regular-text" value="%s" />',
@@ -1087,10 +1087,10 @@ class TravellerPress_Admin {
 	}
 
 
-	function travellerpress_option_global_map_callback(  ) { 
-		
+	function travellerpress_option_global_map_callback(  ) {
+
 		$options = get_option( 'travellerpress_markers_settings', 1 );
-		
+
 		$checkbox = isset( $options ) ? esc_attr(  $options) : '';
         printf(
             '<input type="checkbox" id="auto" name="travellerpress_markers_settings" value="1" %s />',
@@ -1099,16 +1099,16 @@ class TravellerPress_Admin {
 
 	}
 
-	function travellerpress_settings_section_callback(  ) { 
+	function travellerpress_settings_section_callback(  ) {
 
 		//echo __( 'This section description', 'travellerpress' );
 
 	}
 
-	function travellerpress_clusters_status(  ) { 
-		
+	function travellerpress_clusters_status(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		$checkbox = isset( $options['clusters_status'] ) ? esc_attr(  $options['clusters_status']) : '';
         printf(
             '<input type="checkbox" id="auto" name="travellerpress_general_settings[clusters_status]" value="1" %s />',
@@ -1116,10 +1116,10 @@ class TravellerPress_Admin {
         );
 	}
 
-	function travellerpress_infobox_width(  ) { 
-		
+	function travellerpress_infobox_width(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		if(isset($options['infobox_width'])) {
 			$infobox_width = $options['infobox_width'];
 		} else {
@@ -1131,10 +1131,10 @@ class TravellerPress_Admin {
         );
         echo '<p class="description">Run <a href="https://wordpress.org/plugins/regenerate-thumbnails/">Regenerate Thumbnails</a> plugin after changin width or height of infobox</p>';
 	}
-	function travellerpress_infobox_height(  ) { 
-		
+	function travellerpress_infobox_height(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		if(isset($options['infobox_height'])) {
 			$infobox_height = $options['infobox_height'];
 		} else {
@@ -1159,10 +1159,10 @@ class TravellerPress_Admin {
 	    }
 	}
 
-	function travellerpress_min_cluster_size(  ) { 
-		
+	function travellerpress_min_cluster_size(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		if(isset($options['min_cluster_size'])) {
 			$min_cluster_size = $options['min_cluster_size'];
 		} else {
@@ -1176,10 +1176,10 @@ class TravellerPress_Admin {
         <?php
 	}
 
-	function travellerpress_max_cluster_zoom(  ) { 
-		
+	function travellerpress_max_cluster_zoom(  ) {
+
 		$options = get_option( 'travellerpress_general_settings', 1 );
-		
+
 		if(isset($options['max_cluster_zoom'])) {
 			$max_cluster_zoom = $options['max_cluster_zoom'];
 		} else {
@@ -1202,19 +1202,19 @@ class TravellerPress_Admin {
 	}
 
 function tp_modify_maps_table_row( $column_name, $post_id ) {
- 
+
     $custom_fields = get_post_custom( $post_id );
- 
+
     switch ($column_name) {
         case 'tp_maps_shortcode' :
 	        echo '<span class="shortcode"><input type="text" onfocus="this.select();" readonly="readonly" value="[tp-custom-map id=&quot;'.$post_id.'&quot; width=&quot;100%&quot; height=&quot;300px&quot;]" class="large-text code" /></span>';
             break;
- 
+
         default:
     }
 }
- 
 
-	
-		
+
+
+
 }
