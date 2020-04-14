@@ -103,7 +103,7 @@
             map = new L.map("map", {
                 zoom: set_zoom,
                 center: center,
-                layers: new L.TileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+                layers: new L.TileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"),
                 attributionControl: false
             });
             map.getPane('mapPane').style.zIndex = 0;
