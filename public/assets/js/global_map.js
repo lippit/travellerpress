@@ -101,6 +101,8 @@
         function initialize() {
 
             map = new L.map("map", {
+                minZoom: 2,
+                maxZoom: 18,
                 zoom: set_zoom,
                 center: center,
                 layers: new L.TileLayer("//stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg"),
