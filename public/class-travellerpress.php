@@ -311,13 +311,13 @@ class TravellerPress {
 
 		wp_register_style(
 			'leaflet-maps-css',
-			'https://unpkg.com/leaflet@1.6.0/dist/leaflet.css',
+			'/leaflet/leaflet.css',
 			array(),
 			null
 		);
 		wp_register_script(
 			'leaflet-maps-js-api',
-			'https://unpkg.com/leaflet@1.6.0/dist/leaflet.js',
+			'/leaflet/leaflet.js',
 			array(),
 			null
 		);
